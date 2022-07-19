@@ -1,2 +1,1 @@
-print ("Hello world");
-print ("Fucking world");
+print ("Hello world", "Fucking world", sep="\n")
