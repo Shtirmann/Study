@@ -1,0 +1,77 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto&family=Ubuntu&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Dancing+Script&family=Rubik+Burned&family=Silkscreen&display=swap");
+
+form {
+    min-height: 350px;
+    max-height: 700px;
+    width: 700px;
+    border: 1px solid #99ccee;
+    border-radius: 15px;
+    background-color: #99ccee;
+    padding: 5px 30px 30px 30px;
+    margin: 0 auto;
+    box-sizing: border-box;
+}
+
+.form-hint {
+    font-family: Ubuntu;
+    display: block;
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 5px;
+    margin-top: 15px;
+}
+
+.field {
+    box-sizing: border-box;
+    width: 640px;
+    border: 1px solid #222222;
+    padding: 15px 20px;
+    font-family: "Times New Roman", Times, serif;
+    font-size: 20px;
+}
+
+.textarea {
+    min-width: 640px;
+    max-width: 640px;
+    min-height: 150px;
+    max-height: 200px;
+}
+
+.menu {
+    color: #000058;
+    font-size: 40px;
+    font-family: Silkscreen;
+}
+
+.menu__link {
+    color: inherit;
+    font-size: inherit;
+    text-decoration: none;
+    cursor: pointer;
+    font-family: inherit;
+}
+
+.menu__link:hover {
+    color: #e74c3c;
+}
+
+.button {
+    border: 1px;
+    border-color: #e74c3c;
+    border-radius: 10px;
+    padding: 15px 55px;
+    color: #fff;
+    background-color: #e74c3c;
+    font-family: inherit;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 20px;
+    margin-left: 240px;
+}
+
+.personal_data {
+    font-size: 14px;
+    font-weight: bold;
+    font-family: "Trebuchet MS", Arial;
+}

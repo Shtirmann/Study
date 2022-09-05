@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css\main.css" />
+    <title>Document</title>
+</head>
+
+<body>
+    <header>
+        <nav class="menu">
+            MENU:
+            <a href="/link 1" class="menu__link">News</a>
+            <a href="/link 2" class="menu__link">Games</a>
+            <a href="/link 3" class="menu__link">Calendar</a>
+            <a href="/link 4" class="menu__link">Promo</a>
+            <a href="/link 5" class="menu__link">About</a>
+            <input type="search" class="search" placeholder="Поиск" id="">
+    </header>
+
+    <form class="form">
+        <div class="form-row">
+            <span class="form-hint">Введите Фамилию Имя Отчество</span>
+            <input type="text" class="field" placeholder="Например: Иванов Иван Иванович" required>
+        </div>
+        <div class="form-row">
+            <span class="form-hint">Введите ваш e-mail</span>
+            <input type="email" class="field" placeholder="Например: example@corp.com" required>
+        </div>
+        <div class="form-row">
+            <span class="form-hint">Оставьте пожалуйста ваш отзыв</span>
+            <textarea class="field textarea" placeholder="Здравствуйте..." required></textarea>
+        </div>
+        <label class="personal_data">
+            Я даю своё согласие на обработку персональных данных
+            <input type="checkbox" required>
+        </label>
+        <div class="form-row">
+            <button type="submit" class="button">Отправить</button>
+        </div>
+    </form>
+
+</body>
+
+</html>

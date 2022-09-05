@@ -1,0 +1,102 @@
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script&family=Rubik+Burned&family=Silkscreen&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    outline: none;
+}
+
+body, html {
+    height: 100%;
+    width: 100%;
+}
+
+body {
+   /* background: url('file://C:/LOCAL_GIT/Project_web/img/index.jpg'); */
+    background-image: url('../img/index.jpg');
+    /*background-color: #000;*/
+    background-blend-mode: multiply;
+    background-size: cover;
+    font-family: 'Trebuchet MS', Helvetica;
+}
+
+header {
+    padding: 10px 0.5% 0px 0.5%;
+    background: transparent;
+    float: left;
+    position: fixed;
+}
+
+header #logo {
+    color: #fff;
+    cursor: pointer;
+}
+
+header #logo span {
+    font-family: Silkscreen;
+    font-size: 1.7em;
+    line-height: 45px;
+    margin-left: 40px;
+}
+
+@media (min-width: 701px) {
+    #logo {
+        float: left;
+        width: 30%;
+        font-size: 1.1em;
+    }
+    h1 {
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    #about {
+        float: right;
+        width: 67%;
+    }
+}
+
+@media (max-width: 700px) {
+    #logo {
+        margin-top: 15px;
+        width: 100%;
+        font-size: 1.5em;
+    }
+
+    h1 {
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    #about {
+        float: left;
+        width: 100%;
+    }
+}
+
+h1 {
+    font-family: 'Rubik Burned';
+    font-size: 100px;
+    text-align: center;
+    color: #ff0000;
+    text-shadow:
+        0 0 27px #ff0000,
+        0 0 30px #ff0000,
+        0 0 51px #ff0000,
+        0 0 72px #f0f,
+        0 0 112px #f0f,
+        0 0 122px #f0f,
+        0 0 132px #f0a,
+        0 0 181px #f0a;
+}
+
+h2 {
+    font-family: 'Dancing Script';
+    font-size: 20px;
+    color: #fff;
+    text-align: right;
+    margin-right: 2%;
+    text-shadow:
+        0 0 5px #fff,
+        0 0 15px #fff;
+}
