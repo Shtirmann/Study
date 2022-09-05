@@ -7,6 +7,7 @@
     width: 80px;
     border-radius: 50%;
     background-color: #2a2a2a;
+    transition: 0.4s;
 }
 
 .burger-menu__button:hover .burger-menu__lines {
@@ -38,6 +39,7 @@
     top: 12px;
 }
 
+.burger-menu_active .burger-menu__button,
 .burger-menu_active .burger-menu__lines {
     background-color: transparent;
 }
@@ -62,6 +64,7 @@
     background-color: #2a2a2a;
     overflow-y: auto;
     left: -100%;
+    transition: 0.5s;
 }
 
 .burger-menu_active .burger-menu__nav {
@@ -84,5 +87,15 @@ left: 0;
 }
 
 .burger-menu__overlay {
-    
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 10;
+}
+
+.burger-menu_active .burger-menu__overlay {
+    display: block;
 }
