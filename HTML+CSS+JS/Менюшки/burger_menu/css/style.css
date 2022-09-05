@@ -68,7 +68,7 @@
 }
 
 .burger-menu_active .burger-menu__nav {
-left: 0;
+    left: 0;
 }
 
 .burger-menu__link {
