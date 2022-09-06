@@ -2,12 +2,16 @@
 @import url("https://fonts.googleapis.com/css2?family=Dancing+Script&family=Rubik+Burned&family=Silkscreen&display=swap");
 
 form {
+    position: relative;
+    top: 18vh;
+    align-items: center;
+    justify-content: center;
     min-height: 350px;
     max-height: 700px;
     width: 700px;
-    border: 1px solid #99ccee;
+    border: 1px solid #000058;
     border-radius: 15px;
-    background-color: #99ccee;
+    background-color: #000058;
     padding: 5px 30px 30px 30px;
     margin: 0 auto;
     box-sizing: border-box;
@@ -20,12 +24,13 @@ form {
     font-weight: 700;
     margin-bottom: 5px;
     margin-top: 15px;
+    color: #fff;
 }
 
 .field {
     box-sizing: border-box;
     width: 640px;
-    border: 1px solid #222222;
+    border: 1px solid #fff;
     padding: 15px 20px;
     font-family: "Times New Roman", Times, serif;
     font-size: 20px;
@@ -35,7 +40,7 @@ form {
     min-width: 640px;
     max-width: 640px;
     min-height: 150px;
-    max-height: 200px;
+    max-height: 300px;
 }
 
 .menu {
@@ -70,8 +75,76 @@ form {
     margin-left: 240px;
 }
 
-.personal_data {
-    font-size: 14px;
-    font-weight: bold;
-    font-family: "Trebuchet MS", Arial;
+.checkbox {
+    display: flex;
+    align-items: center;
+    margin-left: 3vh;
+    --first-color: #fff;
+    --second-color: #28b78d;
+    --width: 50px;
+    --height: 30px;
+    --offset: 5px;
+    --duration: 0.3s;
+    cursor: pointer;
+}
+
+.checkbox:hover {
+    filter: brightness(1.2);
+}
+
+.checkbox__text {
+    font-family: Ubuntu;
+    font-size: 18px;
+    margin-right: 20px;
+}
+
+.checkbox__input {
+    display: none;
+}
+
+.checkbox__input:checked~.checkbox__div {
+    background-color: var(--second-color);
+}
+
+.checkbox__input:checked~.checkbox__div::before {
+    background-color: var(--first-color);
+    left: calc(var(--width) - var(--height) + var(--offset));
+}
+
+.checkbox__div {
+    position: relative;
+    width: var(--width);
+    height: var(--height);
+    border-radius: var(--width);
+    background-color: var(--first-color);
+    transition: var(--duration);
+}
+
+.checkbox__div::before {
+    content: ' ';
+    position: absolute;
+    top: var(--offset);
+    left: var(--offset);
+    width: calc(var(--height) - 2 * var(--offset));
+    height: calc(var(--height) - 2 * var(--offset));
+    background-color: var(--second-color);
+    border-radius: 50%;
+    transition: var(--duration);
+}
+
+.search {
+    right: 1vh;
+    position: absolute;
+    top: 1.5vh;
+    height: 40px;
+    width: 300px;
+    outline-style: dashed;
+    outline-width: 2px;
+    outline-offset: -4px;
+    outline-color: #e74c3c;
+    font-family: Ubuntu;
+    font-size: 20px;
+    border-style: dashed;
+    border-color: #000058;
+    border-width: 2px;
 }
