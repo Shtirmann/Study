@@ -24,16 +24,50 @@
 
     <form class="form">
         <div class="form-row">
-            <span class="form-hint">Введите Фамилию Имя</span>
-            <input type="text" class="field" placeholder="Иванов Иван" required>
+            <label><span class="form-hint">Введите Фамилию Имя</span>
+                <input type="text" class="field" placeholder="Иванов Иван" required>
+            </label>
         </div>
         <div class="form-row">
-            <span class="form-hint">Введите ваш e-mail</span>
-            <input type="email" class="field" placeholder="example@corp.com" required>
+            <label><span class="form-hint">Введите ваш e-mail</span>
+                <input type="email" class="field" placeholder="example@corp.com" required>
+            </label>
         </div>
         <div class="form-row">
-            <span class="form-hint">Оставьте пожалуйста ваш отзыв</span>
-            <textarea class="field textarea" placeholder="Здесь может быть Ваш отзыв" required></textarea>
+            <label><span class="form-hint">Укажите город</span>
+                <select class="select">
+                    <optgroup label="Россия">
+                        <option selected>Москва</option>
+                        <option>Санкт-Петербург</option>
+                        <option>Курск</option>
+                        <option>Владимир</option>
+                        <option>Калуга</option>
+                        <option>Воронеж</option>
+                        <option>Саратов</option>
+                        <option>Тверь</option>
+                        <option>Ростов</option>
+                        <option>Нижний Новгород</option>
+                    </optgroup>
+                    <optgroup label="Украина">
+                        <option>Киев</option>
+                        <option>Харьков</option>
+                        <option>Кировоград</option>
+                        <option>Кривой Рог</option>
+                        <option>Харьков</option>
+                        <option>Донецк</option>
+                        <option>Запорожье</option>
+                        <option>Херсон</option>
+                        <option>Николаев</option>
+                        <option>Одесса</option>
+                        <option>Луганск</option>
+                    </optgroup>
+                </select>
+            </label>
+        </div>
+        <div class="form-row">
+            <label><span class="form-hint">Оставьте пожалуйста ваш отзыв</span>
+                <textarea class="field textarea" placeholder="Здесь может быть Ваш отзыв" required></textarea>
+            </label>
         </div>
         <div class="form-hint">
             <label class="checkbox">
