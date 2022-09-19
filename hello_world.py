@@ -1,0 +1,1 @@
+print ("Hello world", "Fucking world", "Fucking, fucking world!", sep="\n")
