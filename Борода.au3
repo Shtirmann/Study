@@ -1,9 +1,11 @@
 opt("TrayIconHide", 1)
 Do
 Run("notepad.exe")
-WinWaitActive("Безымянный — Блокнот")
-Send("ЭТО ПИЗДЕЦ, ТОВАРИЩИ")
-WinClose ("Безымянный — Блокнот")
+WinWaitActive("Р‘РµР·С‹РјСЏРЅРЅС‹Р№ вЂ“ Р‘Р»РѕРєРЅРѕС‚")
+Send("Р­РўРћ РџРР—Р”Р•Р¦, РўРћР’РђР РР©Р")
+WinClose ("*Р‘РµР·С‹РјСЏРЅРЅС‹Р№ вЂ“ Р‘Р»РѕРєРЅРѕС‚")
 Send("{Enter}")
-WinWaitActive("Безымянный — Блокнот")
+WinWaitActive("РЎРѕС…СЂР°РЅРµРЅРёРµ")
+Send("РџРёРїРёСЃСЊРєР° СЃР»РѕРЅР°")
+Send("{Enter}")
 Until 0=1
