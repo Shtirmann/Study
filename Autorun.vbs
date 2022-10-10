@@ -1,8 +1,14 @@
 Set objExplorer = CreateObject("InternetExplorer.Application")
 With objExplorer
+
+
+'set WshShell = WScript.CreateObject("WScript.Shell")
+'WshShell.Run """C:\Program Files\Mozilla Firefox\firefox.exe""",1
+
+'With WshShell
     .Navigate "about:blank"
     .Visible = 1
-    .Document.Title = "ЭТО ВИРУС. АААААааааа!!!!!1111"
+    .Document.Title = "This is a VIRUS!!! AAAAAAAAAAAAaaaaa!!!1111"
     .Toolbar=False
     .Statusbar=False
     .Top=150	'Отступ сверху 150px
