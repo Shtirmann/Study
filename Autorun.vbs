@@ -2,12 +2,12 @@ Set objExplorer = CreateObject("InternetExplorer.Application")
 With objExplorer
     .Navigate "about:blank"
     .Visible = 1
-    .Document.Title = "ЭТО ВИРУС. АААААааааа!!!!!1111"
+    .Document.Title = "Р­РўРћ Р’РР РЈРЎ. РђРђРђРђРђР°Р°Р°Р°Р°!!!!!1111"
     .Toolbar=False
     .Statusbar=False
-    .Top=150	'Отступ сверху экрана
-    .Left=600	'Отступ слева экрана
-    .Height=760 'Высота окна
-    .Width=730	'Ширина окна
-    .Document.Body.InnerHTML = "<img src='C:\a.jpg'>"	'Изображение 700х700pix
+    .Top=150	'РћС‚СЃС‚СѓРї СЃРІРµСЂС…Сѓ 150px
+    .Left=600	'РћС‚СЃС‚СѓРї СЃР»РµРІР° 600px
+    .Height=760 'Р’С‹СЃРѕС‚Р° РѕРєРЅР° 760px
+    .Width=730	'РЁРёСЂРёРЅР° РѕРєРЅР° 730px
+    .Document.Body.InnerHTML = "<img src='C:\a.jpg'>"	'РџСѓС‚СЊ Рє РёР·РѕР±СЂР°Р¶РµРЅРёСЋ СЂР°Р·РјРµСЂРѕРј 700x700px
 End with
