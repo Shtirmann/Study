@@ -23,7 +23,7 @@ P.S. Данный бот создан мужчиной для девушек и 
 Пока...
 Посмотрим что из этого выйдет! ;-)
 '''
-
+# Заготовленный набор обращений (first) и ответов (second) для модуля принятия решения (magic_ball)
 first = ["Дорогая,",
          "Милая,",
          "Родная моя,",
@@ -53,19 +53,37 @@ second = ["сейчас  у меня болит голова😰",
           "ты самая крутая, у тебя всё получится😉"]
 
 
-# mesg = random.choice(first) + ' ' + random.choice(second)
-
+#Класс отвечающий за отправку рандомных, не повторяющихся, сообщений в разделе 'magic_ball'
 class Message:
     def __init__(self):
         self.text = random.choice(first) + ' ' + random.choice(second)
 
     def new_message(self):
         self.text = random.choice(first) + ' ' + random.choice(second)
-#        print(self.text)
         return self.text
 
-
 mesg = Message()
+
+signs_q = {
+        'data': construct_keyboard([[(u'Овен\U00002648 ', 'aries')],
+                                    [(u'Телец\U00002649', 'taurus')],
+                                    [(u'Близнецы\U0000264A', 'gemini')],
+                                    [(u'Рак\U0000264B', 'cancer')],
+                                    [(u'Лев\U0000264C', 'leo')],
+                                    [(u'Дева\U0000264D', 'virgo')],
+                                    [(u'Весы\U0000264E', 'libra')],
+                                    [(u'Скорпион\U0000264F', 'scorpio')],
+                                    [(u'Стрелец\U00002650', 'sagittarius')],
+                                    [(u'Козерог\U00002651', 'capricorn')],
+                                    [(u'Водолей\U00002652', 'aquarius')],
+                                    [(u'Рыбы\U00002653', 'pisces')],
+                                    [(u'\U00002B05 Назад', 'horoscope')],
+                                    [(u'Главное меню', 'main_menu')]
+                                    ]),
+        'message_text': 'Выбери знак зодиака',
+        'answer': None
+    }
+
 
 # Основная структура данных. Содержит состояние и соответствующие ему кнопки, текст и ответ
 bot_data = {
@@ -79,10 +97,10 @@ bot_data = {
         'answer': None
     },
     'horoscope': {
-        'data': construct_keyboard([[(u'\U0001F4CC На день', 'signs')],
-                                    [(u'\U0001F5D3 На неделю', 'signs')],
-                                    [(u'\U0001F313 На месяц', 'signs')],
-                                    [(u'\U0001F407 На Год', 'signs')],
+        'data': construct_keyboard([[(u'\U0001F4CC На день', 'day')],
+                                    [(u'\U0001F5D3 На неделю', 'week')],
+                                    [(u'\U0001F313 На месяц', 'month')],
+                                    [(u'\U0001F407 На Год', 'year')],
                                     [(u'Назад', 'main_menu')]
                                     ]),
 
@@ -126,25 +144,10 @@ bot_data = {
         'answer': None,
     },
 
-    'signs': {
-        'data': construct_keyboard([[(u'Овен\U00002648 ', 'aries')],
-                                    [(u'Телец\U00002649', 'taurus')],
-                                    [(u'Близнецы\U0000264A', 'gemini')],
-                                    [(u'Рак\U0000264B', 'cancer')],
-                                    [(u'Лев\U0000264C', 'leo')],
-                                    [(u'Дева\U0000264D', 'virgo')],
-                                    [(u'Весы\U0000264E', 'libra')],
-                                    [(u'Скорпион\U0000264F', 'scorpio')],
-                                    [(u'Стрелец\U00002650', 'sagittarius')],
-                                    [(u'Козерог\U00002651', 'capricorn')],
-                                    [(u'Водолей\U00002652', 'aquarius')],
-                                    [(u'Рыбы\U00002653', 'pisces')],
-                                    [(u'\U00002B05 Назад', 'horoscope')],
-                                    [(u'Главное меню', 'main_menu')]
-                                    ]),
-        'message_text': 'Выбери знак зодиака',
-        'answer': None
-    },
+    'day': signs_q,
+    'week': signs_q,
+    'month': signs_q,
+    'year': signs_q,
 
     'ready': {
         'data': construct_keyboard([
@@ -160,13 +163,11 @@ bot_data = {
 token = 
 
 prev_state = {}
+state = {'date': None,
+	'sign': None,
+}
 
-
-def get_answer(msg):
-    msg_text = str(msg['text'])
-    return msg_text.lower().strip().replace(' ', '')
-
-
+#Функция-обработчик отправки текста в чат боту.
 def on_chat_message(msg):
     content_type, chat_type, chat_id = telepot.glance(msg)
     if chat_id not in prev_state:
@@ -194,51 +195,55 @@ def on_callback_query(msg):
     msg_id = msg['message']['message_id']
     react_to_query(from_id, msg_id, query_id, query_data)
 
-
-def react_to_query(chat_id, msg_id, query_id, query_data):
-    bot.answerCallbackQuery(query_id, text='Click')
-    prev_state[chat_id] = query_data
-    bot_data['ready']['message_text'] = mesg.new_message()
-
-    for state in bot_data:
-        if state == query_data:
-            data = bot_data[state]['data']
-            text = bot_data[state]['message_text']
-            bot.editMessageText(msg_identifier=(chat_id, msg_id),
-                                text=text,
-                                reply_markup=data)
-
-x = 6
-y = 0
-sign = bot_data['signs']['data'][0][x][0][2]
-temp_date = bot_data['horoscope']['data'][0][y][0][0]
-
-if temp_date == '\U0001F4CC На день':
-    date = 'day'
-if temp_date == '\U0001F5D3 На неделю':
-    date = 'week'
-if temp_date == '\U0001F313 На месяц':
-    date = 'month'
-if temp_date == '\U0001F407 На Год':
-    date = 'year'
-           
-URL = (f"https://www.marieclaire.ru/astro/{sign}/{date}/")
-
+#Функция парсер гороскопа из указанного URL
 def parser(URL):
     r = requests.get(URL)
     soup = b(r.text, "html.parser")
     zodiac = soup.find_all("div", class_="block-text")
     return [c.text for c in zodiac]
-clear_zodiac = parser(URL)
-print (clear_zodiac)
 
+#Функция генерации гороскопа в зависимости от нажатых кнопок 'sign' и 'date'
+def generate_horoscope():
+    URL = (f"https://www.marieclaire.ru/astro/{state['sign']}/{state['date']}/")
+    
+    clear_zodiac = parser(URL)
+    print(state, clear_zodiac)
+    return {
+        'data': construct_keyboard([
+            [(u'Назад', 'main_menu')]
+        ]),
+        'message_text': clear_zodiac,
+        'answer': None,
+    }
+
+#Функция-обработчик наэатий кнопок
+def react_to_query(chat_id, msg_id, query_id, query_data):
+    bot.answerCallbackQuery(query_id, text='Click')
+    prev_state[chat_id] = query_data
+    bot_data['ready']['message_text'] = mesg.new_message()
+    if query_data in bot_data:
+        action = bot_data[query_data]
+#Проверка нажимаемой кнопки. Если кнопки в разделе 'horoscope', запись значения query_data в переменную date
+    if query_data in ('day', 'week', 'month', 'year'):
+    	state['date'] = query_data
+    	print(query_data)
+#Проверка нажимаемой кнопки. Если кнопки в разделе 'signs_q', запись значения query_data в переменную sign	
+    elif query_data == 'aries':
+        state['sign'] = query_data
+        action = generate_horoscope()
+        
+    data = action['data']
+    text = action['message_text']
+    bot.editMessageText(msg_identifier=(chat_id, msg_id),
+        text=text,
+    	reply_markup=data)
 
 bot = telepot.Bot(token=token)
 
 MessageLoop(bot, {'chat': on_chat_message,
                   'callback_query': on_callback_query}).run_as_thread()
 
-print('WARNING!!!', 'RoBot working...', 'Press CTRL+C to stop working (NOT RECOMENDED!', sep='\n')
+print('WARNING!!!', 'RoBot working...', 'Press CTRL+C to stop working (NOT RECOMENDED!)', sep='\n')
 
 while 1:
     time.sleep(10)
