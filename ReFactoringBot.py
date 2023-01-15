@@ -207,7 +207,7 @@ def generate_horoscope():
     URL = (f"https://www.marieclaire.ru/astro/{state['sign']}/{state['date']}/")
     
     clear_zodiac = parser(URL)
-    print(state, clear_zodiac)
+    print(state, clear_zodiac) #Для дебага
     return {
         'data': construct_keyboard([
             [(u'Назад', 'main_menu')]
@@ -226,9 +226,9 @@ def react_to_query(chat_id, msg_id, query_id, query_data):
 #Проверка нажимаемой кнопки. Если кнопки в разделе 'horoscope', запись значения query_data в переменную date
     if query_data in ('day', 'week', 'month', 'year'):
     	state['date'] = query_data
-    	print(query_data)
 #Проверка нажимаемой кнопки. Если кнопки в разделе 'signs_q', запись значения query_data в переменную sign	
-    elif query_data == 'aries':
+    elif query_data in ('aries', 'taurus', 'gemini', 'cancer', 'leo', 'virgo', 'libra', 'scorpio', 
+                        'sagittarius', 'capricorn', 'aquarius', 'pisces'):
         state['sign'] = query_data
         action = generate_horoscope()
         
