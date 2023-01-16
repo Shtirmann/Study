@@ -160,7 +160,7 @@ bot_data = {
 }
 
 # Токен бота. Меняете бота -- меняете токен. Публично не выставлятЬ!
-token = 
+token = '???'
 
 prev_state = {}
 state = {'date': None,
@@ -206,8 +206,8 @@ def parser(URL):
 def generate_horoscope():
     URL = (f"https://www.marieclaire.ru/astro/{state['sign']}/{state['date']}/")
     
-    clear_zodiac = parser(URL)
-    print(state, clear_zodiac) #Для дебага
+    clear_zodiac = parser(URL)[0]
+    #print(state, clear_zodiac) #Для дебага
     return {
         'data': construct_keyboard([
             [(u'Назад', 'main_menu')]
@@ -216,7 +216,7 @@ def generate_horoscope():
         'answer': None,
     }
 
-#Функция-обработчик наэатий кнопок
+#Функция-обработчик нажатий кнопок
 def react_to_query(chat_id, msg_id, query_id, query_data):
     bot.answerCallbackQuery(query_id, text='Click')
     prev_state[chat_id] = query_data
