@@ -14,7 +14,6 @@ def construct_keyboard(data: list):
 
     return InlineKeyboardMarkup(inline_keyboard=keyboard_list)
 
-
 # Сообщение при старте бота. Можно поменять текст в тройных кавычках
 start_text = '''Привет, Дорогая!
 Рада тебя видеть😘
@@ -53,7 +52,6 @@ second = ["сейчас  у меня болит голова😰",
           "напишу как узнаю🙄",
           "ты самая крутая, у тебя всё получится😉"]
 
-
 #Класс отвечающий за отправку рандомных, не повторяющихся, сообщений в разделе 'magic_ball'
 class Message:
     def __init__(self):
@@ -84,7 +82,6 @@ signs_q = {
         'message_text': 'Выбери знак зодиака',
         'answer': None
     }
-
 
 # Основная структура данных. Содержит состояние и соответствующие ему кнопки, текст и ответ
 bot_data = {
@@ -142,12 +139,10 @@ bot_data = {
 Готова?''',
         'answer': None,
     },
-
     'day': signs_q,
     'week': signs_q,
     'month': signs_q,
     'year': signs_q,
-
     'ready': {
         'data': construct_keyboard([
             [(u'Спросить ещё раз', 'magic_ball')],
@@ -178,15 +173,10 @@ def on_chat_message(msg):
                         text=start_text,
                         reply_markup=keyboard)
     if prev_state[chat_id] != None:
-        keyboard = construct_keyboard([[(u"\U0001F52E Гороскоп", 'horoscope')],
-                                       [(u'\U00002B50 Мотивация', 'motivation')],
-                                       [(u'\U00002604 Новое', 'new_func')],
-                                       [(u'\U0001F3B1 Помогу принять решение', 'magic_ball')],
-                                       ])
+        keyboard = bot_data['main_menu']['data']
         bot.sendMessage(chat_id=chat_id,
                         text='Выбери раздел',
                         reply_markup=keyboard)
-
 
 def on_callback_query(msg):
     query_id, from_id, query_data = telepot.glance(msg=msg,
