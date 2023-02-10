@@ -13,7 +13,8 @@ bot = telebot.TeleBot(settings.telegram_token)
 if not os.path.exists('/tmp/bot_log/'):
     os.makedirs('/tmp/bot_log/')
 
-logging.basicConfig(filename='/tmp/bot_log/log.txt', level=logging.ERROR)
+logging.basicConfig(filename='/tmp/bot_log/log.txt', level=logging.ERROR,
+                    format='%(asctime)s %(message)s', datefmt='%m/%d/%Y %I:%M:%S %p')
 
 @bot.message_handler(commands=['start'])
 def send_welcome(message):
@@ -43,6 +44,8 @@ def handle_message(message):
     prompt = message.text
     response = generate_response(prompt)
     bot.send_message(chat_id=message.from_user.id, text=response)
+
+print('ChatGPT Bot is working')
     
 while True:
     try:
