@@ -32,21 +32,20 @@ def generate_response(prompt):
         )
         return response["choices"][0]["text"]
 
-
 @bot.message_handler(commands=['bot'])
 def command_message(message):
     prompt = message.text
     response = generate_response(prompt)
     bot.reply_to(message, text=response)
-    
+
 @bot.message_handler(func = lambda _: True)
 def handle_message(message):
     prompt = message.text
     response = generate_response(prompt)
     bot.send_message(chat_id=message.from_user.id, text=response)
-
-print('ChatGPT Bot is working')
     
+print('ChatGPT Bot is working')
+
 while True:
     try:
         bot.polling()
