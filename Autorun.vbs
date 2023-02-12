@@ -1,10 +1,6 @@
 Set objExplorer = CreateObject("InternetExplorer.Application")
 With objExplorer
 
-
-'set WshShell = WScript.CreateObject("WScript.Shell")
-'WshShell.Run """C:\Program Files\Mozilla Firefox\firefox.exe""",1
-
 'With WshShell
     .Navigate "about:blank"
     .Visible = 1
