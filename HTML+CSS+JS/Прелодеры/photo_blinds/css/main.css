@@ -1,0 +1,25 @@
+body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #dcddd8;
+    height: 100vh;
+}
+
+.blinds {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 1500px;
+}
+
+.blinds__img {
+    display: none;
+}
+
+.blinds__img_active {
+    display: block;
+    max-width: 100%;
+    opacity: 0;
+}
