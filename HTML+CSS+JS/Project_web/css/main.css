@@ -6,17 +6,19 @@
     outline: none;
 }
 
-body, html {
+body,
+html {
     height: 100%;
     width: 100%;
 }
 
 body {
-   /* background: url('file://C:/LOCAL_GIT/Project_web/img/index.jpg'); */
-    background-image: url('../img/index.jpg');
-    /*background-color: #000;*/
-    background-blend-mode: multiply;
+    background-image: url(../img/index.jpg);
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
     background-size: cover;
+    background-color: #000;
     font-family: 'Trebuchet MS', Helvetica;
 }
 
@@ -39,15 +41,20 @@ header #logo span {
     margin-left: 40px;
 }
 
-@media (min-width: 701px) {
+@media (max-width: 1080px) and (min-width: 601px) {
     #logo {
         float: left;
         width: 30%;
         font-size: 1.1em;
     }
-    h1 {
+
+    .title_text {
         margin-left: auto;
         margin-right: auto;
+        width: auto;
+        text-align: center;
+        display: flex;
+        flex-wrap: wrap;
     }
 
     #about {
@@ -56,25 +63,29 @@ header #logo span {
     }
 }
 
-@media (max-width: 700px) {
+@media (max-width: 600px) {
     #logo {
         margin-top: 15px;
-        width: 100%;
-        font-size: 1.5em;
+        width: 80%;
+        font-size: 1.1em;
     }
 
-    h1 {
+    .title_text {
         margin-left: auto;
         margin-right: auto;
+        width: auto;
+        text-align: center;
+        display: flex;
+        flex-wrap: wrap;
     }
 
     #about {
         float: left;
-        width: 100%;
+        width: 80%;
     }
 }
 
-h1 {
+.title_text {
     font-family: 'Rubik Burned';
     font-size: 100px;
     text-align: center;
@@ -90,12 +101,14 @@ h1 {
         0 0 181px #f0a;
 }
 
-h2 {
+.signature_text {
+    top: 80vh;
+    position: relative;
     font-family: 'Dancing Script';
     font-size: 20px;
     color: #fff;
-    text-align: right;
-    margin-right: 2%;
+    float: right;
+    margin-right: 5%;
     text-shadow:
         0 0 5px #fff,
         0 0 15px #fff;
