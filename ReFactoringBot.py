@@ -1,17 +1,20 @@
 import telepot
+import datetime
 import time
 import random
 import requests
 from bs4 import BeautifulSoup as b
 from telepot.loop import MessageLoop
 from telepot.namedtuple import InlineKeyboardMarkup, InlineKeyboardButton
+import settings
+settings.init()
 
-
+#Функция вывода кнопок в чат, item[0] - название кнопки, item[1] - алиас на другую кнопку /действие кнопки, item[2] - внешний URL
 def construct_keyboard(data: list):
-    keyboard_list = [[InlineKeyboardButton(text=item[0], callback_data=item[1])
+    keyboard_list = [[InlineKeyboardButton(text=item[0], url=item[2]) if len(item) == 3 
+                      else InlineKeyboardButton(text=item[0], callback_data=item[1])
                       for item in data_line]
                      for data_line in data]
-
     return InlineKeyboardMarkup(inline_keyboard=keyboard_list)
 
 # Сообщение при старте бота. Можно поменять текст в тройных кавычках
@@ -86,10 +89,12 @@ signs_q = {
 # Основная структура данных. Содержит состояние и соответствующие ему кнопки, текст и ответ
 bot_data = {
     'main_menu': {
-        'data': construct_keyboard([[(u"\U0001F52E Гороскоп", 'horoscope')],
+        'data': construct_keyboard([[(u'\U0001F52E Гороскоп', 'horoscope')],
                                     [(u'\U00002B50 Мотивация', 'motivation')],
                                     [(u'\U00002604 Новое', 'new_func')],
                                     [(u'\U0001F3B1 Помогу принять решение', 'magic_ball')],
+                                    [(u'\U0001F3B5 Плейлист дня', 'music')],
+                                    [(u'\U0001F481 О проекте', 'info')],
                                     ]),
         'message_text': 'Выбери раздел',
         'answer': None
@@ -101,7 +106,6 @@ bot_data = {
                                     [(u'\U0001F407 На Год', 'year')],
                                     [(u'Назад', 'main_menu')]
                                     ]),
-
         'message_text': 'На сколько вы доверяете звёздам?',
         'answer': None
     },
@@ -143,6 +147,16 @@ bot_data = {
     'week': signs_q,
     'month': signs_q,
     'year': signs_q,
+    'music': {
+        'data': construct_keyboard([[(u'\U0001F399 Яндекс Музыка', 'ya_music', 'https://music.yandex.ru/playlist/daily')],
+                                    [(u'\U0001F39A Spotify', 'spoti', 'https://open.spotify.com/?go=1&sp_cid=e95cafcf-1030-44fd-a795-04747bc0798d&utm_source=spotify_web_player&utm_medium=mobile&fallback=getapp')],
+                                    [(u'\U0001F3B8 Apple Music', 'apple_mu', 'https://music.apple.com/ru/radio?l=ru')],
+                                    [(u'\U0001F3B6 VK Music', 'vk_music', 'https://vk.com/audio')],
+                                    [(u'\U0001F50A Сбер Звук', 'zvooq', 'https://zvuk.com/waves')],
+                                    [(u'Назад', 'main_menu')
+                                     ]]),
+        'message_text': 'Выбери музыкальный сервис:'
+    },
     'ready': {
         'data': construct_keyboard([
             [(u'Спросить ещё раз', 'magic_ball')],
@@ -153,26 +167,25 @@ bot_data = {
     },
 }
 
-# Токен бота. Меняете бота -- меняете токен. Публично не выставлятЬ!
-token = 
+token = settings.token
 
 prev_state = {}
-state = {'date': None,
+state = {
+    'date': None,
 	'sign': None,
 }
 
 #Функция-обработчик отправки текста в чат боту.
 def on_chat_message(msg):
     content_type, chat_type, chat_id = telepot.glance(msg)
-    if chat_id not in prev_state:
-        prev_state[chat_id] = None
+    prev_state.setdefault(chat_id, None)
 
     if prev_state[chat_id] is None:
         keyboard = construct_keyboard([[('Жми скорее!', 'main_menu')]])
         bot.sendMessage(chat_id=chat_id,
                         text=start_text,
                         reply_markup=keyboard)
-    if prev_state[chat_id] != None:
+    else:
         keyboard = bot_data['main_menu']['data']
         bot.sendMessage(chat_id=chat_id,
                         text='Выбери раздел',
@@ -181,8 +194,10 @@ def on_chat_message(msg):
 def on_callback_query(msg):
     query_id, from_id, query_data = telepot.glance(msg=msg,
                                                    flavor='callback_query')
-    msg_id = msg['message']['message_id']
-    react_to_query(from_id, msg_id, query_id, query_data)
+    message = msg['message']
+    if message is not None:
+        msg_id = message['message_id']
+        react_to_query(from_id, msg_id, query_id, query_data)
 
 #Функция парсер гороскопа из указанного URL
 def parser(URL):
@@ -196,7 +211,7 @@ def generate_horoscope():
     URL = (f"https://www.marieclaire.ru/astro/{state['sign']}/{state['date']}/")
     
     clear_zodiac = parser(URL)[0]
-    #print(state, clear_zodiac) #Для дебага
+    #print(state, clear_zodiac) #Для дебага гороскопа
     return {
         'data': construct_keyboard([
             [(u'Назад', 'main_menu')]
@@ -234,5 +249,6 @@ MessageLoop(bot, {'chat': on_chat_message,
 
 print('WARNING!!!', 'RoBot working...', 'Press CTRL+C to stop working (NOT RECOMENDED!)', sep='\n')
 
-while 1:
-    time.sleep(10)
+while True:
+    current_time = datetime.datetime.now()
+    time.sleep(0.1)
