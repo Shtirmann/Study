@@ -149,7 +149,7 @@ bot_data = {
     'year': signs_q,
     'music': {
         'data': construct_keyboard([[(u'\U0001F399 Яндекс Музыка', 'ya_music', 'https://music.yandex.ru/playlist/daily')],
-                                    [(u'\U0001F39A Spotify', 'spoti', 'https://open.spotify.com/?go=1&sp_cid=e95cafcf-1030-44fd-a795-04747bc0798d&utm_source=spotify_web_player&utm_medium=mobile&fallback=getapp')],
+                                    [(u'\U0001F39A Spotify', 'spoti', 'https://open.spotify.com/collection/playlists')],
                                     [(u'\U0001F3B8 Apple Music', 'apple_mu', 'https://music.apple.com/ru/radio?l=ru')],
                                     [(u'\U0001F3B6 VK Music', 'vk_music', 'https://vk.com/audio')],
                                     [(u'\U0001F50A Сбер Звук', 'zvooq', 'https://zvuk.com/waves')],
