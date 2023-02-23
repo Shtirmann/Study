@@ -1,6 +1,7 @@
 import telepot
 import datetime
-import time
+import pytz
+import asyncio
 import random
 import requests
 from bs4 import BeautifulSoup as b
@@ -109,6 +110,10 @@ bot_data = {
         'message_text': 'На сколько вы доверяете звёздам?',
         'answer': None
     },
+    'day': signs_q,
+    'week': signs_q,
+    'month': signs_q,
+    'year': signs_q,
     'motivation': {
         'data': construct_keyboard([[(u'\U0001F639 Для работы', 'joy_cat')],
                                     [(u'\U0001F63B Для учёбы', 'heart_eyes_cat')],
@@ -143,10 +148,6 @@ bot_data = {
 Готова?''',
         'answer': None,
     },
-    'day': signs_q,
-    'week': signs_q,
-    'month': signs_q,
-    'year': signs_q,
     'music': {
         'data': construct_keyboard([[(u'\U0001F399 Яндекс Музыка', 'ya_music', 'https://music.yandex.ru/playlist/daily')],
                                     [(u'\U0001F39A Spotify', 'spoti', 'https://open.spotify.com/collection/playlists')],
@@ -166,8 +167,6 @@ bot_data = {
         'answer': None,
     },
 }
-
-token = settings.token
 
 prev_state = {}
 state = {
@@ -242,7 +241,7 @@ def react_to_query(chat_id, msg_id, query_id, query_data):
         text=text,
     	reply_markup=data)
 
-bot = telepot.Bot(token=token)
+bot = telepot.Bot(token=settings.token)
 
 MessageLoop(bot, {'chat': on_chat_message,
                   'callback_query': on_callback_query}).run_as_thread()
